@@ -11,9 +11,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 255, 250, 252),
+        backgroundColor: Color.fromARGB(255, 255, 250, 252),
         body: Center(
           child: RichText(
+            textAlign: TextAlign.center,
             text: TextSpan(
               text: '안녕하세요!\n간단하게 제 ',
               style: TextStyle(fontWeight: FontWeight.bold),
@@ -67,7 +68,6 @@ class MyApp extends StatelessWidget {
                 ),
               ],
             ),
-            textAlign: TextAlign.center,
           ),
         ),
       ),
