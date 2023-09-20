@@ -115,58 +115,49 @@ class MyApp extends StatelessWidget {
                 Divider(),
                 Container(
                   width: double.infinity,
-                  height: 110,
+                  height: 100,
                   margin: EdgeInsets.only(top: 8),
-                  padding: EdgeInsets.all(8),
+                  padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
                     color: Colors.blue,
                   ),
                   child: Row(
                     children: [
-                      Expanded(
-                        flex: 2,
-                        child: CircleAvatar(
-                          radius: 40,
-                          backgroundImage:
-                              NetworkImage("https://picsum.photos/100/100"),
+                      CircleAvatar(
+                        radius: 40,
+                        backgroundImage:
+                            NetworkImage("https://picsum.photos/100/100"),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: 8),
+                        child: Column(
+                          children: [
+                            Text(
+                              '라이언',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 21,
+                              ),
+                            ),
+                            Text(
+                              '개임개발',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                            Text(
+                              'C#, Unity',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      Expanded(
-                        flex: 4,
-                        child: Container(
-                          margin: EdgeInsets.fromLTRB(5, 12, 0, 12),
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              Text(
-                                '라이언',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 21,
-                                ),
-                              ),
-                              Text(
-                                '개임개발',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                              Text(
-                                'C#, Unity',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: Icon(
-                          Icons.add,
-                          color: Colors.white,
-                        ),
+                      Spacer(flex: 2),
+                      Icon(
+                        Icons.add,
+                        color: Colors.white,
                       ),
                     ],
                   ),
