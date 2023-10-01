@@ -6,120 +6,272 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a blue toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: Page1(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class Page1 extends StatelessWidget {
+  const Page1({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    return Scaffold(
+      appBar: AppBar(title: Text('5일차 과제')),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Page2(),
+                      ));
+                },
+                child: Text('1번 과제'),
+              ),
+              SizedBox(height: 100),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Page3(),
+                    ),
+                  );
+                },
+                child: Text('2번 과제'),
+              ),
+              SizedBox(height: 100),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Page4(),
+                    ),
+                  );
+                },
+                child: Text('3번 과제'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Page2 extends StatelessWidget {
+  const Page2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    List animalList = ['강아지', '고양이', '앵무새', '토끼', '오리', '거위', '원숭이'];
+    var scrollController = ScrollController();
     return Scaffold(
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        title: Text('5일차 과제'),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: ListView.builder(
+        controller: scrollController,
+        itemCount: 7, // 목록에 표시할 항목의 총 수
+        itemBuilder: (BuildContext context, int index) {
+          // 각 항목을 생성하고 반환하는 함수
+          return ListTile(
+            title: Container(
+              height: 300,
+              alignment: Alignment.center,
+              child: Text(animalList[index]),
+            ), // 예제로 항목을 생성하는 방법
+            onTap: () {},
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          scrollController.animateTo(scrollController.position.minScrollExtent,
+              duration: Duration(milliseconds: 500), curve: Curves.ease);
+        },
+        child: Icon(Icons.vertical_align_top),
+      ),
+    );
+  }
+}
+
+class Page3 extends StatefulWidget {
+  const Page3({super.key});
+
+  @override
+  State<Page3> createState() => _Page3State();
+}
+
+class _Page3State extends State<Page3> {
+  var textController = TextEditingController();
+  String inputText = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('5일차 과제'),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+      ),
+      body: SafeArea(
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+          children: [
+            TextField(
+              style: TextStyle(
+                fontSize: 20,
+              ),
+              controller: textController,
+              onChanged: (value) {
+                inputText = value;
+                setState(() {});
+              },
             ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              '$inputText',
+              style: TextStyle(fontSize: 18),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+        onPressed: () {
+          textController.text = '';
+          inputText = '';
+          setState(() {});
+        },
+        child: Icon(Icons.close),
+      ),
+    );
+  }
+}
+
+class Page4 extends StatefulWidget {
+  const Page4({super.key});
+
+  @override
+  State<Page4> createState() => _Page4State();
+}
+
+class _Page4State extends State<Page4> {
+  var iconController = TextEditingController();
+  String iconText = '';
+  bool sunColorBool = false;
+  bool moonColorBool = false;
+  bool starColorBool = false;
+  Color sunColor = Colors.grey;
+  Color moonColor = Colors.grey;
+  Color starColor = Colors.grey;
+
+  void changeColor() {
+    setState(() {
+      sunColorBool == true || iconText == 'Sun'
+          ? sunColor = Colors.red
+          : sunColor = Colors.grey;
+      moonColorBool == true || iconText == 'Moon'
+          ? moonColor = Colors.orange
+          : moonColor = Colors.grey;
+      starColorBool == true || iconText == 'Star'
+          ? starColor = Colors.yellow
+          : starColor = Colors.grey;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('5일차 과제'),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(Icons.arrow_back),
+        ),
+      ),
+      body: SafeArea(
+        child: ListView(
+          children: [
+            ListTile(
+              leading: Icon(Icons.sunny, color: sunColor),
+              title: Text('Sun'),
+              trailing: IconButton(
+                  onPressed: () {
+                    sunColorBool = !sunColorBool;
+                    changeColor();
+                  },
+                  icon: Icon(Icons.arrow_right)),
+            ),
+            ListTile(
+              leading: Transform(
+                transform: Matrix4.rotationY(3.141592),
+                alignment: Alignment.center,
+                child: Icon(Icons.brightness_3, color: moonColor),
+              ),
+              title: Text('Moon'),
+              trailing: IconButton(
+                  onPressed: () {
+                    moonColorBool = !moonColorBool;
+                    changeColor();
+                  },
+                  icon: Icon(Icons.arrow_right)),
+            ),
+            ListTile(
+              leading: Icon(Icons.star, color: starColor),
+              title: Text('Star'),
+              trailing: IconButton(
+                  onPressed: () {
+                    starColorBool = !starColorBool;
+                    changeColor();
+                  },
+                  icon: Icon(Icons.arrow_right)),
+            ),
+            TextField(
+              controller: iconController,
+              onSubmitted: (value) {
+                iconText = value;
+                print(iconText);
+                changeColor();
+              },
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          sunColorBool = false;
+          moonColorBool = false;
+          starColorBool = false;
+          iconText = '';
+          changeColor();
+        },
+        child: Icon(Icons.replay),
+      ),
     );
   }
 }
