@@ -11,6 +11,72 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    List<Map<String, dynamic>> playList = [
+      {
+        "imgUrl": 'assets/images/music_come_with_me.png',
+        "title": 'Come with me',
+        "artist": 'Surfaces 및 salem ilese',
+        "duration": Duration(minutes: 3, seconds: 14),
+      },
+      {
+        "imgUrl": 'assets/images/music_good_day.png',
+        "title": 'Good day',
+        "artist": 'Surfaces',
+        "playTime": '3:09',
+        "duration": Duration(minutes: 3, seconds: 09),
+      },
+      {
+        "imgUrl": 'assets/images/music_honesty.png',
+        "title": 'Honesty',
+        "artist": 'Pink Sweat\$',
+        "playTime": '3:24',
+        "duration": Duration(minutes: 3, seconds: 24),
+      },
+      {
+        "imgUrl": 'assets/images/music_i_wish_i_missed_my_ex.png',
+        "title": 'I Wish I Missed My Ex',
+        "artist": '마할리아 버크마',
+        "playTime": '3:20',
+        "duration": Duration(minutes: 3, seconds: 20),
+      },
+      {
+        "imgUrl": 'assets/images/music_plastic_plants.png',
+        "title": 'Plastic Plants',
+        "artist": '마할리아 버크마',
+        "playTime": '3:24',
+        "duration": Duration(minutes: 3, seconds: 24),
+      },
+      {
+        "imgUrl": 'assets/images/music_sucker_for_you.png',
+        "title": 'Sucker for you',
+        "artist": '맷 테리',
+        "duration": Duration(minutes: 3, seconds: 00),
+      },
+      {
+        "imgUrl": 'assets/images/music_summer_is_for_falling_in_love.png',
+        "title": 'Summer is for falling in love',
+        "artist": 'Sarah Kang & Eye Love Brandon',
+        "duration": Duration(minutes: 3, seconds: 00),
+      },
+      {
+        "imgUrl": 'assets/images/music_these_days.png',
+        "title": 'These days(feat. Jess Glynne, Macklemore & Dan Caplen)',
+        "artist": 'Rudimental',
+        "duration": Duration(minutes: 3, seconds: 00),
+      },
+      {
+        "imgUrl": 'assets/images/music_you_make_me.png',
+        "title": 'You Make Me',
+        "artist": 'DAY6',
+        "duration": Duration(minutes: 3, seconds: 00),
+      },
+      {
+        "imgUrl": 'assets/images/music_zombie_pop.png',
+        "title": 'Zombie Pop',
+        "artist": 'DRP IAN',
+        "duration": Duration(minutes: 3, seconds: 00),
+      }
+    ];
     return MaterialApp(
       theme: ThemeData.from(colorScheme: ColorScheme.dark()),
       home: Scaffold(
@@ -38,83 +104,25 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 8),
-          child: ListView(
-            children: [
-              MusicTile(
-                imgUrl: 'assets/images/music_come_with_me.png',
-                title: 'Come with me',
-                artist: 'Surfaces 및 salem ilese',
-                playTime: '3:00',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_Good_day.png',
-                title: 'Good day',
-                artist: 'Surfaces',
-                playTime: '3:09',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_Honesty.png',
-                title: 'Honesty',
-                artist: 'Pink Sweat\$',
-                playTime: '3:24',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_I_Wish_I_Missed_My_Ex.png',
-                title: 'I Wish I Missed My Ex',
-                artist: '마할리아 버크마',
-                playTime: '3:20',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_Plastic_Plants.png',
-                title: 'Plastic Plants',
-                artist: '마할리아 버크마',
-                playTime: '3:24',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_Sucker_for_you.png',
-                title: 'Sucker for you',
-                artist: '맷 테리',
-                playTime: '3:00',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_Summer_is_for_falling_in_love.png',
-                title: 'Summer is for falling in love',
-                artist: 'Sarah Kang & Eye Love Brandon',
-                playTime: '3:00',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_these_days.png',
-                title: 'These days(feat. Jess Glynne, Macklemore & Dan Caplen)',
-                artist: 'Rudimental',
-                playTime: '3:00',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_You_Make_Me.png',
-                title: 'You Make Me',
-                artist: 'DAY6',
-                playTime: '3:00',
-              ),
-              MusicTile(
-                imgUrl: 'assets/images/music_Zombie_Pop.png',
-                title: 'Zombie Pop',
-                artist: 'DRP IAN',
-                playTime: '3:00',
-              ),
-            ],
+        body: ListView.builder(
+          itemCount: playList.length,
+          itemBuilder: (context, index) => MusicTile(
+            imgUrl: playList[index]["imgUrl"],
+            title: playList[index]["title"],
+            artist: playList[index]["artist"],
+            playTime: playList[index]["duration"].toString(),
           ),
         ),
         bottomSheet: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: 64,
+              height: 70,
               color: Colors.white12,
               child: ListTile(
                 leading: ClipRRect(
                   borderRadius: BorderRadius.circular(4),
-                  child: Image.asset('assets/images/music_You_Make_Me.png'),
+                  child: Image.asset('assets/images/music_you_make_me.png'),
                 ),
                 title: Text('You Make Me'),
                 subtitle: Text('Day6'),
@@ -157,7 +165,6 @@ class MyApp extends StatelessWidget {
           ],
         ),
       ),
-      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
