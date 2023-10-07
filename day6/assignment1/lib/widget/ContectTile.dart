@@ -1,3 +1,4 @@
+import 'package:assignment1/page/contact_detail_page.dart';
 import 'package:flutter/material.dart';
 
 class ContectTile extends StatelessWidget {
@@ -14,6 +15,18 @@ class ContectTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ContactDetailPage(
+              name: name,
+              number: number,
+              imgUrl: imgUrl,
+            ),
+          ),
+        );
+      },
       title: Text(name),
       subtitle: Text(number),
       leading: CircleAvatar(
