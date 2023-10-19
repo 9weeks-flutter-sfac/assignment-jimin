@@ -1,14 +1,17 @@
+import 'package:assignment1/main_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const KioskApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class KioskApp extends StatelessWidget {
+  const KioskApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp();
+    return MaterialApp(
+      home: MainPage(),
+    );
   }
 }
