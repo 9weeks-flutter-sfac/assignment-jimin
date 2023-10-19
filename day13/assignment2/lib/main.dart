@@ -78,18 +78,25 @@ class _MyAppState extends State<MyApp> {
                 else
                   FutureBuilder(
                     future: getLocation(),
-                    child: ListView.builder(
-                      itemCount: myLoc?.residents.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            SizedBox(
-                              child: Text(myLoc?.residents[index]),
-                            ),
-                          ],
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount: myLoc?.residents.length ?? 0,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  SizedBox(
+                                    child: Text(myLoc?.residents[index]),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
                         );
-                      },
-                    ),
+                      }
+                      return SizedBox();
+                    },
                   ),
               ],
             ),
