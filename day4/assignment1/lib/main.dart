@@ -43,7 +43,7 @@ class calculation extends StatelessWidget {
   Widget build(BuildContext context) {
     int x = 0;
     int y = 0;
-    int result = 0;
+    var result = 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -90,7 +90,7 @@ class calculation extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 48),
                     child: TextField(
                       onChanged: (value) {
-                        x = int.parse(value);
+                        y = int.parse(value);
                       },
                       decoration: const InputDecoration(
                           hintText: 'y값을 입력하세요.',
@@ -114,7 +114,7 @@ class calculation extends StatelessWidget {
                 )),
             ElevatedButton(
                 onPressed: () {
-                  result = x + y;
+                  result = x * y;
                   showResultDialog(context, result);
                 },
                 child: const Text(
@@ -123,7 +123,7 @@ class calculation extends StatelessWidget {
                 )),
             ElevatedButton(
                 onPressed: () {
-                  result = x + y;
+                  result = x - y;
                   showResultDialog(context, result);
                 },
                 child: const Text(
@@ -132,7 +132,7 @@ class calculation extends StatelessWidget {
                 )),
             ElevatedButton(
                 onPressed: () {
-                  result = x + y;
+                  result = (x / y).toInt();
                   showResultDialog(context, result);
                 },
                 child: const Text(
