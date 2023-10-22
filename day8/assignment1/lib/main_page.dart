@@ -16,18 +16,24 @@ class _MainPageState extends State<MainPage> {
 
   var url = "https://sniperfactory.com/sfac/http_day16_dogs";
   int imageUrlIndex = 0;
-  var imageUrl;
+  var data = [];
   var dio = Dio();
 
   Future<void> fetchData() async {
-    try {
-      Response response = await dio.get(url);
-      imageUrl = response.data["body"];
-      // Use imageUrl as needed
-    } catch (e) {
-      print("Error: $e");
+    var res = await dio.get(url);
+    if (res.statusCode == 200) {
+      data = res.data["body"];
     }
   }
+
+  // Future<List<dynamic>> getData() async {
+  //   var res = await dio.get(url);
+  //   if (res.statusCode == 200) {
+  //     print(res.data["body"]);
+  //     return res.data["body"];
+  //   }
+  //   return [];
+  // }
 
   void _onRefresh() async {
     await Future.delayed(Duration(milliseconds: 1000));
@@ -61,7 +67,7 @@ class _MainPageState extends State<MainPage> {
                 body = Text("No more Data");
               }
 
-              return Container(
+              return SizedBox(
                 height: 55.0,
                 child: Center(child: body),
               );
@@ -71,36 +77,38 @@ class _MainPageState extends State<MainPage> {
           onRefresh: _onRefresh,
           child: Center(
             child: FutureBuilder(
-              future: dio.get(url),
+              future: fetchData(),
               builder: (context, snapshot) {
                 return GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
+                    mainAxisSpacing: 20, // 세로 간격 조절
                   ),
+                  itemCount: data.length,
                   itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 5,
+                    return Card(
+                      child: GridTile(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 700, // 원하는 높이로 조절하세요
+                            child: Image.network(
+                              data[index]["url"],
+                              fit: BoxFit.contain,
                             ),
-                          ],
+                          ),
                         ),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(24),
-                              child: Image.network(
-                                imageUrl[index]["msg"],
+                        footer: Container(
+                          color:
+                              Colors.white, // Background color for the footer
+                          child: Column(
+                            children: [
+                              Text(
+                                data[index]["msg"],
                               ),
-                            )
-                          ],
+                              Icon(Icons.message)
+                            ],
+                          ),
                         ),
                       ),
                     );
