@@ -269,6 +269,7 @@ class _Page4State extends State<Page4> {
           starColorBool = false;
           iconText = '';
           changeColor();
+          iconController.text = '';
         },
         child: Icon(Icons.replay),
       ),
